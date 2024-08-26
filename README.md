@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# React Basics
+## What is the React ?
+React is a JavaScript library used for building user interfaces. React divides the site into components, and if there's an update in a component, it only updates that specific component instead of updating all of them. This approach is efficient because re-rendering the entire page would be costly in terms of DOM performance, so only the relevant area is updated. For example, if the notification count on a notification icon in the user interface increases or decreases, React only updates that specific area, leaving the other areas unchanged.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### When we use the React ?
+If there is a lot of DOM manipulation in the UI, using React would be sensible. For example, in chat applications, there are numerous changes such as notifications, messages, etc. It's clear why this technology was developed by Facebook. :)
 
-## Available Scripts
+#### Differance between Real DOM and Virtual DOM
+The Real DOM is a model that organizes all HTML elements, style information, text, and related content on a web page into a tree structure. This model manages the structure and content of the page through browsers and responds to user interactions. The Virtual DOM, on the other hand, is a copy of the Real DOM and is maintained by React as a JavaScript object. When an update is about to occur on the site, React compares the Real DOM with the Virtual DOM, and only the different area/node is written onto the corresponding area/node in the Real DOM. This way, instead of updating the entire page, only the specific area is updated, avoiding unnecessary rendering costs.
 
-In the project directory, you can run:
+## Components
+#### Creating new project
+When creating our project, we use the npx package tool. The reason for this is that npx allows us to temporarily download and run a package that is not installed globally while executing a command. A React project is created with ***create-react-app***. This setup automatically handles configurations, initial files, and other settings.
+```
+yarn global add npx
+npx create-react-app my-app
+```
+#### What is the component ?
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A component is a building block that makes up a website. It typically represents a single function or part of the user interface and has its own isolated structure. Components accept various inputs and produce specific outputs, which makes the website dynamic. Additionally, they have a modular structure and can be reused repeatedly.
+#### JSX Structure
+It is a structure within JavaScript that allows us to create user interfaces by writing HTML-like syntax. It is used to define React components.
+```js
+function Header(){
+	return(
+		<h2> Header Component </h2>
+	);
+}
+export default Header;
+```
+In JSX, component names are written with uppercase letters. This is to avoid confusion with HTML tags when using the component.
+Basic component structure is like the on above. A function is created with the name of the component, and the content of the component is defined within the return statement. ```export default ComponentName``` is used to allow it to be used by other components.
+When calling the component within another component, it is sufficient to write it like an HTML tag. Here, since the Header component does not have any child components, it can be written as ```<Header />```.
+```js
+function App(){
+  const name = "Sima"
+  const isLogged =true;
+  return(
+    <>
+	<Header />
+	 	<p>{name}<p/>
+    	<h1>{ isLogged && `Hi ${name}`}</h1>
+    	<h1>{ !isLogged ?  `Hi ${name}` : 'Please Log In!'}</h1>
+    </>
+  );
+}
+```
+Defining and using variables within a component is similar to Angular; we use curly braces ```{}``` to call and use the defined variables within the JSX.
+Additionally, conditional expressions can be made using ternary operators ```? :``` or logical operators like ```&&``` and ```||```.
