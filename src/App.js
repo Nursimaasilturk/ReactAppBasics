@@ -1,12 +1,29 @@
 import './App.css';
-import Header from './components/header';
+import User from "./components/User"
+import Todo from './components/Todo';
 function App(){
-  const name = "Sima"
-  const isLogged =true;
+  const todos =[
+    {
+      id:1,
+      description:'Do Grocery Shopping'
+    },
+    {
+      id:2,
+      description:'Complete the Project'
+    },
+    {
+      id:3,
+      description:'Check Emails'
+    },
+    {
+      id:4,
+      description:'Exercise'
+    }
+  ]
   return(
     <>
-    <h1>{ isLogged && `Selam ${name}`}</h1>
-    <h1>{ isLogged ? 'Tanımlı değil': `Selam ${name}`}</h1>
+    <User  age={'24'} isLoggedIn={true} address={{title:'Bursa',zipCode:16000}}/>
+    <Todo todos={todos} />
     </>
   );
 }

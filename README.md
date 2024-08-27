@@ -47,3 +47,127 @@ function App(){
 ```
 Defining and using variables within a component is similar to Angular; we use curly braces ```{}``` to call and use the defined variables within the JSX.
 Additionally, conditional expressions can be made using ternary operators ```? :``` or logical operators like ```&&``` and ```||```.
+## Props
+In React, the props (properties) structure is a mechanism used to pass data from one component to another. With props, components become dynamic by receiving different data. Props are passed to the component as attributes and can be accessed within the component as a 'props' object.
+```js
+import './App.css';
+import User from "./components/User"
+function App(){
+  return(
+    <>
+    <User name="Sima" surname="ASİLTÜRK" age={24} isLoggedIn={true}/>
+    </>
+  );
+}
+
+export default App;
+```
+```js
+function User(props){
+	return(
+		<>
+		<h1>User Information</h1>
+		<p>{props.isLoggedIn ? `${props.name} ${props.surname} (${props.age})` : `Please log In!`}</p>
+		</>
+	);
+}
+export default User;
+```
+In the example above, the User component receives four props: ***name***, ***surname***, ***age***, and ***isLoggedIn***. The User component itself takes these ***props*** as parameters under the props object and accesses each property individually within the component. Another way to use props is shown below.
+```js
+function User({name:isim,surname,age,isLoggedIn}){
+	return(
+	 <>
+	  <h1>User Information</h1>
+	  <p>{isLoggedIn ? `${isim} ${surname} (${age})` : `Please log In!`}</p>
+	 </>
+	);
+}
+export default User;
+```
+Props are taken as parameters within an object. While using the same name for the parameter is generally preferred for better code readability, if different naming is required, it can be done in the format propName: paramName
+#### Key Prob
+In React, the ```key``` prop ensures that each item in a list or group is uniquely identified. Keys help React determine which items have changed, been added, or removed, allowing updates to be performed efficiently. The key prop is typically assigned to items listed by the ```.map()``` function.
+```js
+import './App.css';
+import Todo from './components/Todo';
+function App(){
+  const todos =[
+    {
+      id:1,
+      description:'Do Grocery Shopping'
+    },
+    {
+      id:2,
+      description:'Complete the Project'
+    },
+    {
+      id:3,
+      description:'Check Emails'
+    },
+    {
+      id:4,
+      description:'Exercise'
+    }
+  ]
+  return(
+    <>
+    <Todo todos={todos} />
+    </>
+  );
+}
+
+export default App;
+```
+```js
+function Todo({todos}){
+  return(
+	<>
+	<h3>TODO LIST</h3>
+	{todos.map(todo => (
+		<p key={todo.id}>{todo.description}
+		</p>
+	) )}
+	</>
+  )
+}
+export default Todo;
+```
+#### Prop Types
+PropTypes in React are used to define the types of props a component receives. This structure allows you to clearly specify what types of data the component expects, and it ensures that a warning is given if incorrect data types are provided. First, you need to import this structure into your component. In the component file, we define the types of all the props our component receives using the prop-types tool.
+```js
+import PropTypes from 'prop-types';
+function User({name:isim,surname,age,isLoggedIn,address}){
+	return(
+		<>
+		<h1>User Information</h1>
+		<br/>
+		{address.title} /{address.zipCode}
+		<br/>
+		<p>{isLoggedIn ? `${isim} ${surname} (${age})` : `Please log In!`}</p>
+		</>
+	);
+}
+User.propTypes = {
+  name:PropTypes.string.isRequired,
+  surname:PropTypes.string.isRequired,
+  age:PropTypes.oneOfType([
+	PropTypes.number,
+	PropTypes.string
+  ]),
+  isLoggedIn:PropTypes.bool,
+  address:PropTypes.shape({
+	title:PropTypes.string,
+	zipCode:PropTypes.number
+})
+}
+User.defaultProps = {
+	name:'NAME',
+	surname:'SURNAME'
+}
+export default User;
+```
+> ***isRequired:*** Makes the prop required.
+> ***oneOfType:*** Allows multiple types to be assigned to the prop.
+> ***shape:*** Used to define the types of properties within an object when sending a prop of object type.
+> ***Default Props:*** Used to define default values for props when no value is provided.
