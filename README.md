@@ -167,7 +167,9 @@ User.defaultProps = {
 }
 export default User;
 ```
-> ***isRequired:*** Makes the prop required.
-> ***oneOfType:*** Allows multiple types to be assigned to the prop.
-> ***shape:*** Used to define the types of properties within an object when sending a prop of object type.
-> ***Default Props:*** Used to define default values for props when no value is provided.
+* ***isRequired:*** Makes the prop required.
+* ***oneOfType:*** Allows multiple types to be assigned to the prop.
+* ***shape:*** Used to define the types of properties within an object when sending a prop of object type.
+* ***Default Props:*** Used to define default values for props when no value is provided.
+
+## State
