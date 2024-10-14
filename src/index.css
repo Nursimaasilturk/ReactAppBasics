@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#root{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: palegoldenrod;
+}
+.middle{
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.counter-btn{
+  height: 60px;
+  width: auto;
+  padding:10px 20px ;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+.dec{
+  background-color: palevioletred;
+}
+.in{
+  background-color: palegreen;
+}
+.counter-value{
+  font-size: 30px;
+}

@@ -1,4 +1,6 @@
 import './App.css';
+import Counter from './components/Counter';
+import InputExample from './components/InputExample';
 import State from './components/State';
 function App(){
   // const todos =[
@@ -23,7 +25,7 @@ function App(){
     <>
     {/* <User  age={'24'} isLoggedIn={true} address={{title:'Bursa',zipCode:16000}}/>
     <Todo todos={todos} /> */}
-    <State />
+    <InputExample />
     </>
   );
 }
