@@ -266,7 +266,7 @@ function InputExample() {
 
 export default InputExample
 ```
-
+[![Watch the video](https://github.com/Nursimaasilturk/ReactAppBasics/blob/master/src/assets/input-example.png)](https://github.com/Nursimaasilturk/ReactAppBasics/blob/master/src/assets/react-input.mp4)
 
 
 
