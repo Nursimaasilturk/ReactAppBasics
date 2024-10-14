@@ -173,3 +173,100 @@ export default User;
 * ***Default Props:*** Used to define default values for props when no value is provided.
 
 ## State
+A JS object that holds all the data within our components that has the potential to change. Any data in a component that has the potential to change at any point is defined as state. It holds the component’s own dynamic data, meaning the variables get updated.
+In functional components, state is defined using **useState()** hook. 
+```js 
+import {useState} from "react"
+function State(){
+	const [name,setName] = useState('Sima');
+	return(
+		<>
+		 <h1>State Component</h1>
+		 <p>{name}</p>
+		 <button onClick={()=> {setName('Nursima')}} >Change Name and Age *!</button>
+		</>
+	)
+}
+export default State
+```
+
+Our variable is defined inside ‘**[ ]**’. Here, name is the name of the variable, and the variable is updated using the setName function. We perform the update operation with the useState() hook. A default value can be provided or it can be left empty as well.
+
+### Array States
+```js
+import {useState} from "react"
+function State(){
+	const [fruits,setFruits] = useState(["apple","watermelon","lemon"]);
+	return(
+		<>
+		 {fruits.map((fruit,key) => 
+			<div key={key}>{fruit}</div>
+		 )}
+		 <button onClick={() => setFruits([...fruits,'peach'])}>Add new fruit !</button>
+		</>
+	)
+}
+export default State
+```
+### Object States
+
+```js
+import {useState} from "react"
+function State(){
+	const [address,setAddress] = useState({city:"Erzurum",province:'Pasinler',zip:25096});
+	return(
+		<>
+		 <h1>State Component</h1>
+		 <hr/>
+		 <h2>Adress</h2>
+		 <p>{address.city}</p>
+		 <p>{address.province}</p>
+		 <p>{address.zip}</p>
+		 <button onClick={()=>setAddress({city:'Bursa',province:'İnegöl',zip:16000})}>Change the address</button>
+		 <button onClick={()=>setAddress({...address,province:'Nilüfer',zip:16120})}>Update address</button> 
+     // we use spread operator '...address' for keep previous unchanged values
+		</>
+	)
+}
+export default State
+```
+## Input Example
+```js
+import React, { useState } from 'react'
+
+function InputExample() {
+	// const [name,setName] = useState("");
+	// const [surname,setSurname] = useState("");
+	// const onChangeName =  (event)=>setName(event.target.value);
+	// const onChangeSurname = (event)=>setSurname(event.target.value);
+	const [form,setForm]=useState({name:'',surname:''});
+	const onChangeForm = (event) =>{
+		setForm({...form,[event.target.name]:event.target.value})
+	}
+  return (
+	<div>
+	  <h1>Input Example</h1>
+	  <br/>
+	  <div>
+		<h3>Name</h3>
+		{/* <input value={name} onChange={onChangeName}/> */}
+		<input name="name" value={form.name} onChange={onChangeForm} />
+	  </div>
+	  <div>
+		<h3>Surname</h3>
+		{/* <input value={surname} onChange={onChangeSurname}/> */}
+		<input name="surname" value={form.surname} onChange={onChangeForm} />
+	  </div>
+	  <br />
+	  {/* {name} {surname} */}
+	  {form.name} {form.surname}
+	</div>
+  )
+}
+
+export default InputExample
+```
+
+
+
+
