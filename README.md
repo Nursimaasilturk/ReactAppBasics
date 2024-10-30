@@ -270,12 +270,12 @@ export default InputExample
 
 ## React Lifecycles
 The stages a React component goes through during its lifecycle are defined as lifecycle methods. When a component is created, updated by the DOM, or removed, specific actions are triggered. React lifecycles are used to manage these events.
-The React lifecycle consists of three phases:
-**1. Mounting:** When the component is created and inserted into the DOM.
-**2. Updating:** When the component is re-rendered due to changes in state or props.
+The React lifecycle consists of three phases:<br>
+**1. Mounting:** When the component is created and inserted into the DOM.<br>
+**2. Updating:** When the component is re-rendered due to changes in state or props.<br>
 **3. Unmounting:**  When the component is removed from the DOM.
 
-In functional components, these lifecycle functions are handled with React Hooks. The ***useEffect()*** Hook manages *componentDidMount (mounting)*, *componentDidUpdate (updating)*, and *componentWillUnmount (unmounting)* processes all in one. To perform actions on the initial render and subsequent renders, use ***useEffect(() => { /* actions */ }, [])***. For cleanup actions, the return function inside useEffect is used.
+In functional components, these lifecycle functions are handled with React Hooks. The ***useEffect()*** Hook manages *componentDidMount (mounting)*, *componentDidUpdate (updating)*, and *componentWillUnmount (unmounting)* processes all in one. To perform actions on the initial render and subsequent renders, use ***useEffect(() => { /* actions */ }, [])***. For cleanup actions, the return function inside useEffect is used.<br>
 
 **Mounting:** When we want to perform actions as soon as the component is first added to the DOM, we capture this phase using the following code:
 ```js
@@ -284,7 +284,7 @@ useEffect(()=>{
 },[]);
 ```
 
-For this setup, the **useEffect()** hook takes a dependency array as its second parameter. In the first parameter, we define the function that includes the actions we want to execute. The empty array **(()=>{},[])** as the second parameter prevents updates from re-triggering the effect, so it only runs when the component is added to the DOM for the first time.
+For this setup, the **useEffect()** hook takes a dependency array as its second parameter. In the first parameter, we define the function that includes the actions we want to execute. The empty array **(()=>{},[])** as the second parameter prevents updates from re-triggering the effect, so it only runs when the component is added to the DOM for the first time.<br>
 **Updating:** This is the phase when the component is being updated. To capture the updating phase, the following code can be used.
 ```js
 import {useState,useEffect} from "react";
@@ -351,7 +351,7 @@ useEffect(()=>{
  console.log("Name or number state is updated!");
 },[name,number]);
 ```
-The functions written inside the array customize the update action and allow us to capture the update phase of specific states, enabling our code to produce different outputs based on various conditions.
+The functions written inside the array customize the update action and allow us to capture the update phase of specific states, enabling our code to produce different outputs based on various conditions.<br>
 **Unmounting:** This is the phase just before the component is removed from the DOM. To capture this situation, the following code can be used.
 ```js
 import {useState,useEffect} from "react";
