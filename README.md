@@ -268,5 +268,158 @@ export default InputExample
 ```
 [![Watch the video](https://github.com/Nursimaasilturk/ReactAppBasics/blob/master/src/assets/input-example.png)](https://github.com/Nursimaasilturk/ReactAppBasics/blob/master/src/assets/react-input.mp4)
 
+## React Lifecycles
+The stages a React component goes through during its lifecycle are defined as lifecycle methods. When a component is created, updated by the DOM, or removed, specific actions are triggered. React lifecycles are used to manage these events.
+The React lifecycle consists of three phases:
+**1. Mounting:** When the component is created and inserted into the DOM.
+**2. Updating:** When the component is re-rendered due to changes in state or props.
+**3. Unmounting:**  When the component is removed from the DOM.
+
+In functional components, these lifecycle functions are handled with React Hooks. The ***useEffect()*** Hook manages *componentDidMount (mounting)*, *componentDidUpdate (updating)*, and *componentWillUnmount (unmounting)* processes all in one. To perform actions on the initial render and subsequent renders, use ***useEffect(() => { /* actions */ }, [])***. For cleanup actions, the return function inside useEffect is used.
+
+**Mounting:** When we want to perform actions as soon as the component is first added to the DOM, we capture this phase using the following code:
+```js
+useEffect(()=>{
+	console.log('Component is mounted');
+},[]);
+```
+
+For this setup, the **useEffect()** hook takes a dependency array as its second parameter. In the first parameter, we define the function that includes the actions we want to execute. The empty array **(()=>{},[])** as the second parameter prevents updates from re-triggering the effect, so it only runs when the component is added to the DOM for the first time.
+**Updating:** This is the phase when the component is being updated. To capture the updating phase, the following code can be used.
+```js
+import {useState,useEffect} from "react";
+function LifeCycle(){
+	const [number,setNumber]= useState(0);
+	const [name,setName] = useState("Sima");
+	// When the component is mounted
+	useEffect(()=>{
+		console.log('Component is mounted');
+	}
+	,[]);
+	// when any state is updating
+	// useEffect(()=>{
+	// 	console.log("Component is updated!");
+	// });
+	//-----
+	// for specific state
+	useEffect(()=>{
+		console.log("Number state is updated!");
+	},[number]);
+	useEffect(()=>{
+		console.log("Name state is updated!");
+	},[name]);
+	useEffect(()=>{
+		console.log("Name or number state is updated!");
+	},[name,number]);
+	return(
+		<>
+			<h1>LifeCycle</h1>
+			<br/>
+			<h2>Number Updating</h2>
+			<div className="middle">
+				<p className="custom-value">{number}</p>
+				<button className="counter-btn in" onClick={()=> setNumber(number + 1)}>Click</button>
+			</div>
+			<br/>
+			<h2>Changing Name</h2>
+			<div className="middle">
+				<p className="custom-value">{name}</p>
+				<button className="counter-btn dec" onClick={()=> setName("Nursima")}>Click</button>
+			</div>
+		</>
+	)
+}
+export default LifeCycle;
+```
+
+If we want to capture any update actions, we should remove the dependency array.
+```js
+useEffect(()=>{
+	console.log("Component is updated!");
+ });
+```
+
+To capture a specific update action, the following code can be used.
+```js
+useEffect(()=>{
+ console.log("Number state is updated!");
+},[number]);
+useEffect(()=>{
+ console.log("Name state is updated!");
+},[name]);
+useEffect(()=>{
+ console.log("Name or number state is updated!");
+},[name,number]);
+```
+The functions written inside the array customize the update action and allow us to capture the update phase of specific states, enabling our code to produce different outputs based on various conditions.
+**Unmounting:** This is the phase just before the component is removed from the DOM. To capture this situation, the following code can be used.
+```js
+import {useState,useEffect} from "react";
+function LifeCycle(){
+	const [number,setNumber]= useState(0);
+	useEffect(()=>{
+		console.log('Component is mounted');
+		const interval = setInterval(()=>{
+			setNumber((n) => n + 1);
+		},1000);
+		return () => {
+			clearInterval(interval);
+			console.log('The component is unmounted')};
+		}
+	,[]);
+	useEffect(()=>{
+		console.log("Number state is updated!");
+	},[number]);
+	return(
+		<>
+			<h1>LifeCycle</h1>
+			<br/>
+			<h2>Number Updating</h2>
+			<div className="middle">
+				<p className="custom-value">{number}</p>
+				<button className="counter-btn in" onClick={()=> setNumber(number + 1)}>Click</button>
+			</div>
+		</>
+	)
+}
+export default LifeCycle;
+```
+```js
+import { useState } from 'react';
+import './App.css';
+import LifeCycle from './components/LifeCycle';
+function App(){
+  const [isVisible,setIsVisible] = useState(true);
+  return(
+    <>
+    {}
+    {isVisible && <LifeCycle />}
+    <br/>
+    <button className='counter-btn dec' onClick={()=> setIsVisible(!isVisible)}>Toggle</button>
+    </>
+  );
+}
+
+export default App;
+```
+In this application, we have a counter that increases by 1 every second. The component updates with each increment. To capture the unmounting phase of the component, the **return** statement inside useEffect is used.
+```js
+useEffect(()=>{
+	console.log('Component is mounted');
+	const interval = setInterval(()=>{
+		setNumber((n) => n + 1);
+	},1000);
+	return () => {
+		clearInterval(interval);
+		console.log('The component is unmounted')
+	};
+},[]);
+```
+The purpose of using the **clearInterval()** method here is that the update process would continue even after the component is unmounted, so we need to clear this interval. Finally, we can log to the console to see the unmounting process. We also performed the removal of the component within App.js.
+
+In conclusion, the lifecycle of React components can be easily managed using **useEffect()**.
+
+
+
 
 
