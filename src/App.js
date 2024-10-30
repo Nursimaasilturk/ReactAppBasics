@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import './App.css';
 import Counter from './components/Counter';
 import InputExample from './components/InputExample';
+import LifeCycle from './components/LifeCycle';
 import State from './components/State';
 function App(){
   // const todos =[
@@ -21,11 +23,15 @@ function App(){
   //     description:'Exercise'
   //   }
   // ]
+  const [isVisible,setIsVisible] = useState(true);
   return(
     <>
     {/* <User  age={'24'} isLoggedIn={true} address={{title:'Bursa',zipCode:16000}}/>
     <Todo todos={todos} /> */}
-    <InputExample />
+    {}
+    {isVisible && <LifeCycle />}
+    <br/>
+    <button className='counter-btn dec' onClick={()=> setIsVisible(!isVisible)}>Toggle</button>
     </>
   );
 }

@@ -45,3 +45,8 @@ code {
 .counter-value{
   font-size: 30px;
 }
+.custom-value{
+  font-size: 19px;
+  font-weight: 600;
+  color: #000;
+}
